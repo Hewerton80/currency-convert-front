@@ -1,0 +1,66 @@
+.root {
+  @apply flex items-start  pt-8 pb-14 overflow-hidden w-60 fixed -translate-x-60
+  translate-y-[-35px] z-20;
+  transition: ease 0.3s all;
+  height: calc(100vh - 80px) !important;
+}
+.root.expanded {
+  @apply translate-x-0;
+}
+.root nav {
+  @apply flex flex-col w-full;
+}
+.root ul {
+  @apply flex flex-col w-full;
+}
+
+.root ul li {
+  @apply flex w-full hover:bg-gray-lighter;
+}
+.root ul li.active {
+  @apply bg-gray-lighter;
+}
+.root ul li a {
+  @apply flex items-center w-full h-full text-secondary text-sm justify-start
+  py-3.5 pr-3.5 pl-[9.6px];
+}
+.root ul li a p {
+  @apply ml-3;
+}
+.root ul li a svg {
+  @apply text-lg;
+}
+.wrapper_sidebar {
+  @apply hidden fixed left-0 top-0 w-screen min-h-screen z-10;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.wrapper_sidebar.expanded {
+  @apply flex;
+}
+
+@media (min-width: theme('screens.md')) {
+  .root {
+    @apply ml-2 w-[68px] items-center static;
+    transform: translateX(0) !important;
+    transform: translatey(0) !important;
+    height: auto;
+  }
+  .root.expanded {
+    @apply w-60 px-5;
+  }
+  .root ul li a {
+    @apply justify-center;
+  }
+  .root ul li a p {
+    @apply hidden;
+  }
+  .root ul li a.expanded {
+    @apply justify-start;
+  }
+  .root ul li a.expanded p {
+    @apply block;
+  }
+  .wrapper_sidebar {
+    display: none !important;
+  }
+}

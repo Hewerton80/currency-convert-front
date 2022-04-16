@@ -1,0 +1,22 @@
+.root {
+  @apply flex flex-col items-center space-y-3;
+}
+.root svg {
+  @apply text-7xl;
+}
+.root h4 {
+  @apply text-lg text-center;
+}
+.root p {
+  @apply text-sm text-center;
+}
+
+.root.success h4 {
+  @apply text-success;
+}
+.root.info h4 {
+  @apply text-info;
+}
+.root.danger h4 {
+  @apply text-danger;
+}

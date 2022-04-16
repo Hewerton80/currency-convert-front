@@ -1,0 +1,16 @@
+.root {
+  @apply flex w-full text-black overflow-x-auto;
+}
+.root table {
+  @apply w-full;
+}
+.root th {
+  @apply py-5 px-4 align-top font-medium text-left;
+  border-bottom: 1px solid #f3f3f3;
+}
+.root tbody tr:nth-of-type(odd) {
+  background-color: #f4f5fa;
+}
+.root tbody td {
+  @apply text-sm py-5 px-4;
+}
