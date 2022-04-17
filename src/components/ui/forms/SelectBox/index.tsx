@@ -1,5 +1,11 @@
-import React from 'react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  startTransition,
+  useDeferredValue,
+} from 'react'
 import cn from 'classnames'
 import styles from './styles.module.css'
 import DivWitchClickOutsideEvent from '../../overlay/DivWitchClickOutsideEvent'
@@ -20,6 +26,7 @@ interface SelectBoxProps {
   selectedOption: ISelectBoxOptions
   placeholder?: string
   error?: string
+  disabled?: boolean
   onChange?: (value: ISelectBoxOptions) => void
 }
 
@@ -30,12 +37,15 @@ function SelectBox({
   selectedOption = { value: '', text: '' },
   placeholder = '',
   error,
+  disabled,
   onChange,
 }: SelectBoxProps) {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState('')
 
   const [filteredOptions, setFilteredOptions] = useState<ISelectBoxOptions[]>(options)
+
+  const isFocusedDeferredValue = useDeferredValue(isFocused)
 
   const avaliableOptions = useMemo(() => {
     let avaliableOptionsTmp = [...options]
@@ -52,16 +62,18 @@ function SelectBox({
   }, [options, selectedOption])
 
   useEffect(() => {
-    const searchTrimmed = search.trim()
-    if (searchTrimmed) {
-      setFilteredOptions(() =>
-        avaliableOptions.filter(({ text }) =>
-          text.trim().toLowerCase().includes(searchTrimmed.toLowerCase())
+    startTransition(() => {
+      const searchTrimmed = search.trim()
+      if (searchTrimmed) {
+        setFilteredOptions(() =>
+          avaliableOptions.filter(({ text }) =>
+            text.trim().toLowerCase().includes(searchTrimmed.toLowerCase())
+          )
         )
-      )
-    } else {
-      setFilteredOptions(avaliableOptions)
-    }
+      } else {
+        setFilteredOptions(avaliableOptions)
+      }
+    })
   }, [search, avaliableOptions])
 
   const selectedValueText = useMemo(() => {
@@ -82,13 +94,30 @@ function SelectBox({
     [onChange]
   )
 
+  const handleClickSearchbox = useCallback(() => {
+    if (!(isFocused || disabled)) {
+      setIsFocused(true)
+    }
+  }, [isFocused, disabled])
+
+  const handleClickOutSide = useCallback(() => {
+    if (isFocusedDeferredValue) {
+      setIsFocused(false)
+    }
+  }, [isFocusedDeferredValue])
+
   return (
     <>
       <div
         id={id}
-        className={cn(styles.root, error && styles.error, className)}
+        className={cn(
+          styles.root,
+          error && styles.error,
+          disabled && styles.disabled,
+          className
+        )}
         role="searchbox"
-        onClick={() => !isFocused && setIsFocused(true)}
+        onClick={handleClickSearchbox}
       >
         <span>
           <p>
@@ -96,9 +125,7 @@ function SelectBox({
           </p>
         </span>
         {isFocused && (
-          <DivWitchClickOutsideEvent
-            onClickOutside={() => isFocused && setIsFocused(false)}
-          >
+          <DivWitchClickOutsideEvent onClickOutside={handleClickOutSide}>
             <span>
               <InputText
                 value={search}

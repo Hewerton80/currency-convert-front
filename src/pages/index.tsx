@@ -18,11 +18,11 @@ const Home: NextPage = () => {
   const [lastAmoutInput, setLastAmoutInput] = useState('')
   const [amoutInput, setAmoutInput] = useState('R$ 1,00')
   const [fromCurrency, setFromCurrency] = useState<ISelectBoxOptions>({
-    text: 'Real brasileiro',
+    text: 'BRL - Real brasileiro',
     value: 'BRL',
   })
   const [toCurrency, setToCurrency] = useState<ISelectBoxOptions>({
-    text: 'Dólar dos EUA',
+    text: 'USD - Dólar dos EUA',
     value: 'USD',
   })
   const selelectBoxOptions = useMemo<ISelectBoxOptions[]>(() => {
@@ -46,11 +46,9 @@ const Home: NextPage = () => {
 
   const [status, setStatus] = useState<StateStatusEnum>(StateStatusEnum.idle)
 
-  // const [isConvtLoading, setIsConvterLoading] = useState(false)
-
-  const isConvtLoading = useMemo(() => status === StateStatusEnum.loading, [status])
-  const isConvtetError = useMemo(() => status === StateStatusEnum.error, [status])
-  const isConvtetSuccess = useMemo(() => status === StateStatusEnum.success, [status])
+  const isConvertLoading = useMemo(() => status === StateStatusEnum.loading, [status])
+  const isConvertError = useMemo(() => status === StateStatusEnum.error, [status])
+  const isConvertSuccess = useMemo(() => status === StateStatusEnum.success, [status])
 
   const handleSwitchFromtTo = useCallback(() => {
     const aux = fromCurrency
@@ -84,7 +82,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex justify-center w-full h-full">
-      <Card className="max-w-7xl w-full">
+      <Card className="max-w-7xl w-full mb-16">
         <CardHeader>
           <CardTitle>Converter</CardTitle>
         </CardHeader>
@@ -100,6 +98,7 @@ const Home: NextPage = () => {
                     console.log(value)
                     setAmoutInput(value)
                   }}
+                  disabled={isConvertLoading}
                 />
               </FormGroup>
             </div>
@@ -111,6 +110,7 @@ const Home: NextPage = () => {
                   selectedOption={fromCurrency}
                   options={selelectBoxOptions}
                   onChange={(option) => setFromCurrency(option)}
+                  disabled={isConvertLoading}
                 />
               </FormGroup>
             </div>
@@ -119,6 +119,7 @@ const Home: NextPage = () => {
                 className="w-full px-1"
                 variant="primary"
                 onClick={handleSwitchFromtTo}
+                disabled={isConvertLoading}
               >
                 <FaExchangeAlt className="rotate-90 md:rotate-0" size={18} />
               </Button>
@@ -131,6 +132,7 @@ const Home: NextPage = () => {
                   selectedOption={toCurrency}
                   options={selelectBoxOptions}
                   onChange={(option) => setToCurrency(option)}
+                  disabled={isConvertLoading}
                 />
               </FormGroup>
             </div>
@@ -138,7 +140,7 @@ const Home: NextPage = () => {
               <div className="flex justify-end">
                 <Button
                   variant="primary"
-                  isLoading={isConvtLoading}
+                  isLoading={isConvertLoading}
                   onClick={handleSubmitConvetCurrencies}
                 >
                   Converter
@@ -147,7 +149,7 @@ const Home: NextPage = () => {
             </div>
             <div className="col-span-12">
               <div className="flex flex-col">
-                {isConvtetSuccess ? (
+                {isConvertSuccess ? (
                   <>
                     <p className="text-base">
                       {lastAmoutInput} ({lastFromCurrency.text}) =
@@ -156,7 +158,7 @@ const Home: NextPage = () => {
                       {lastResultConverted} ({lastToCurrency.text})
                     </p>
                   </>
-                ) : isConvtetError ? (
+                ) : isConvertError ? (
                   <Alert variant="danger">OPSS, OCORREU UM ERRO NA CONVERSÃO</Alert>
                 ) : (
                   <></>

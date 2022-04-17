@@ -4,14 +4,15 @@
 .root.error {
   @apply border-1 border-danger;
 }
+
 .root > span {
   @apply flex items-center text-sm outline-none rounded-sm duration-300 
   h-[46px] px-[22px] text-[#495057];
   border: 1px solid #f3f3f3;
   transition: 0.3s ease all;
 }
-.root > span:not(:disabled) {
-  cursor: pointer;
+.root:not(.disabled) > span {
+  @apply cursor-pointer;
 }
 .root > span:focus {
   @apply border-info;

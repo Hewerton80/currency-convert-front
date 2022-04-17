@@ -22,7 +22,7 @@ function DivWitchClickOutsideEvent({
     document.addEventListener('click', handleClick)
 
     return () => document.removeEventListener('click', handleClick)
-  })
+  }, [onClickOutside])
 
   return (
     <div ref={divRef} {...rest}>
