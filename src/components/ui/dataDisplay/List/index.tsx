@@ -17,7 +17,14 @@ export function List({ children, className, ...rest }: ListProps) {
 
 export function ListItem({ children, className, isActive, ...rest }: ListItemProps) {
   return (
-    <li className={cn(className, isActive && 'bg-gray-lightest')} {...rest}>
+    <li
+      className={cn(
+        className,
+        isActive && 'bg-gray-lightest dark:bg-secondary',
+        'dark:hover:bg-secondary'
+      )}
+      {...rest}
+    >
       {children}
     </li>
   )

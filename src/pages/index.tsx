@@ -151,10 +151,10 @@ const Home: NextPage = () => {
               <div className="flex flex-col">
                 {isConvertSuccess ? (
                   <>
-                    <p className="text-base">
+                    <p className="text-base dark:text-light">
                       {lastAmoutInput} ({lastFromCurrency.text}) =
                     </p>
-                    <p className="text-3xl">
+                    <p className="text-3xl dark:text-light">
                       {lastResultConverted} ({lastToCurrency.text})
                     </p>
                   </>

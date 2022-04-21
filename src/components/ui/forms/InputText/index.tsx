@@ -13,22 +13,17 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     | 'time'
     | 'datetime-local'
     | 'date'
-  error?: string
 }
 
-function InputText(
-  { className, type = 'text', error, ...rest }: InputTextProps,
-  ref: any
-) {
+function InputText({ className, type = 'text', ...rest }: InputTextProps, ref: any) {
   return (
     <>
       <input
         ref={ref}
-        className={cn(styles.root, error && styles.error, className)}
+        className={cn(styles.root, 'dark:border-white/10 dark:text-light', className)}
         type={type}
         {...rest}
       />
-      {error && <ValidationError>{error}</ValidationError>}
     </>
   )
 }

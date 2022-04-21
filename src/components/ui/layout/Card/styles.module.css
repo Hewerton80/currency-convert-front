@@ -1,5 +1,6 @@
 .card {
-  @apply flex flex-col bg-white rounded-md border-gray-lightest border-1 h-fit;
+  @apply flex flex-col bg-white 
+  rounded-md border-gray-lightest border-1 h-fit;
 }
 
 .card_header {
@@ -18,7 +19,7 @@
   @apply flex;
 }
 .card_title > h4 {
-  @apply font-medium text-black;
+  @apply font-medium text-black ;
 }
 
 .card_footer {

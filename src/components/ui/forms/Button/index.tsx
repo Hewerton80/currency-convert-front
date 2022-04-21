@@ -20,7 +20,7 @@ function Button({
   return (
     <button
       disabled={disabled || isLoading}
-      className={cn(styles.root, styles[variant], className)}
+      className={cn(styles.root, 'dark:text-light', styles[variant], className)}
       {...rest}
     >
       {isLoading ? <Spinner size={18} /> : children}

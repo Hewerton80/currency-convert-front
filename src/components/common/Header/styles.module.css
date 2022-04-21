@@ -1,46 +1,9 @@
 .root {
-  @apply flex h-20 w-full px-7 bg-primary z-10;
+  @apply flex h-20 w-full px-7 bg-primary border-b-1 border-primary z-10 ;
 }
 .root .header_inner {
-  @apply flex items-center justify-between w-full h-full;
+  @apply flex items-center mx-auto max-w-7xl w-full h-full;
 }
-.root .header_inner > div:nth-child(1) {
-  @apply flex items-center h-full;
-}
-.root .header_inner > div:nth-child(1):not(.show) {
-  @apply w-auto px-0;
-}
-.root .header_inner > div:nth-child(1).show {
-  @apply w-auto md:w-60 px-0 md:px-5;
-}
-.root .header_inner > div:nth-child(1) .logo_wrapper:not(.show) {
-  @apply hidden;
-}
-.root .header_inner > div:nth-child(1) .logo_wrapper.show {
-  @apply hidden md:block;
-}
-.root .header_inner > div:nth-child(1) .navbar_toggler {
-  @apply flex ml-auto cursor-pointer w-5 h-7;
-}
-.root .header_inner > div:nth-child(1) .navbar_toggler svg {
-  @apply m-auto text-white text-xl;
-}
-
-.root .header_inner > div:nth-child(2) {
-  @apply flex h-full items-center ml-auto;
-}
-.root .header_inner > div:nth-child(2) > div {
-  @apply flex items-center cursor-pointer relative;
-}
-.root .header_inner > div:nth-child(2) > div > p {
-  @apply ml-4 text-sm font-bold text-white;
-}
-.root .header_inner > div:nth-child(2) > div > svg {
-  @apply text-white ml-1;
-}
-.root .header_inner > div:nth-child(2) > div span {
-  @apply flex items-center;
-}
-.root .header_inner > div:nth-child(2) > div span svg {
-  @apply text-black mr-2;
+.root .theme-switch {
+  @apply flex items-center ml-auto;
 }

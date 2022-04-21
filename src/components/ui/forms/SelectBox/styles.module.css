@@ -7,8 +7,7 @@
 
 .root > span {
   @apply flex items-center text-sm outline-none rounded-sm duration-300 
-  h-[46px] px-[22px] text-[#495057];
-  border: 1px solid #f3f3f3;
+  h-[46px] px-[22px] text-[#495057] border-1 border-[#f3f3f3];
   transition: 0.3s ease all;
 }
 .root:not(.disabled) > span {

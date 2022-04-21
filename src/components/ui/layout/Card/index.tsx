@@ -5,7 +5,10 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {}
 
 export function Card({ children, className, ...rest }: CardProps) {
   return (
-    <div className={cn(styles.card, className)} {...rest}>
+    <div
+      className={cn(styles.card, 'dark:bg-dark-card dark:border-dark-card', className)}
+      {...rest}
+    >
       {children}
     </div>
   )
@@ -38,7 +41,7 @@ export function CardBody({ children, className, ...rest }: CardProps) {
 export function CardTitle({ children, className, ...rest }: CardProps) {
   return (
     <div className={cn(styles.card_title, className)} {...rest}>
-      <h4>{children}</h4>
+      <h4 className="dark:text-light">{children}</h4>
     </div>
   )
 }

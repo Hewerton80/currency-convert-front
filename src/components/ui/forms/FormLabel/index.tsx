@@ -7,7 +7,10 @@ interface FormLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 function FormLabel({ children, className, required, ...rest }: FormLabelProps) {
   return (
-    <label className={cn('text-sm text-black mb-2', className)} {...rest}>
+    <label
+      className={cn('text-sm text-black mb-2', 'dark:text-light', className)}
+      {...rest}
+    >
       {children}
       {required && <span className="text-danger">*</span>}
     </label>

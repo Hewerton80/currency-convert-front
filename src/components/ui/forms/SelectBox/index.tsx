@@ -49,7 +49,6 @@ function SelectBox({
 
   const avaliableOptions = useMemo(() => {
     let avaliableOptionsTmp = [...options]
-    console.log('avaliableOptionsTmp')
     if (selectedOption.value && selectedOption.text) {
       avaliableOptionsTmp = avaliableOptionsTmp.filter(
         (opt) => opt.value !== selectedOption.value
@@ -110,22 +109,20 @@ function SelectBox({
     <>
       <div
         id={id}
-        className={cn(
-          styles.root,
-          error && styles.error,
-          disabled && styles.disabled,
-          className
-        )}
+        className={cn(styles.root, disabled && styles.disabled, className)}
         role="searchbox"
         onClick={handleClickSearchbox}
       >
-        <span>
-          <p>
-            {selectedValueText || <span className="text-secondary">{placeholder}</span>}
+        <span className="dark:border-white/10">
+          <p className="dark:text-light">
+            {selectedValueText || <span className="text-secondary ">{placeholder}</span>}
           </p>
         </span>
         {isFocused && (
-          <DivWitchClickOutsideEvent onClickOutside={handleClickOutSide}>
+          <DivWitchClickOutsideEvent
+            className="dark:bg-dark-card dark:border-white/10"
+            onClickOutside={handleClickOutSide}
+          >
             <span>
               <InputText
                 value={search}
@@ -133,10 +130,11 @@ function SelectBox({
                 autoFocus
               />
             </span>
-            <List className="max-h-96 overflow-y-auto">
+            <List className="max-h-96 overflow-y-auto ">
               {filteredOptions.map((opt, i) => (
                 <ListItem
                   key={opt.value + i}
+                  className="dark:text-light"
                   role="button"
                   onClick={() =>
                     handleChangeOptions({ value: opt.value, text: opt.text })
