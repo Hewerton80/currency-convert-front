@@ -6,10 +6,10 @@
   fill: theme('colors.warning');
 }
 .root .sun {
-  @apply left-[7px] ;
+  @apply left-[7px];
 }
 .root .moon {
-  @apply right-[7px] ;
+  @apply right-[7px];
 }
 .root > input {
   @apply absolute left-0 top-0 w-full h-full opacity-0 z-20 cursor-pointer;
@@ -21,7 +21,7 @@
 .root > input ~ .cicle {
   content: '';
   transition: 0.3s ease all;
-  @apply absolute z-20 h-[33px] w-[33px] rounded-full bg-white left-1 
+  @apply absolute z-20 h-[33px] w-[33px] rounded-full bg-light left-1 
   translate-y-1/2 bottom-1/2 cursor-pointer;
 }
 
