@@ -3,11 +3,11 @@ import cn from 'classnames'
 import styles from './styles.module.css'
 import { FiSun, FiMoon } from 'react-icons/fi'
 import assets from '../../../../../assets.json'
-interface SwitchProps extends InputHTMLAttributes<HTMLInputElement> {
+interface ThemeSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
   text?: string
 }
 
-function Switch({ text, className, ...rest }: SwitchProps) {
+function ThemeSwitch({ text, className, ...rest }: ThemeSwitchProps) {
   return (
     <label htmlFor={rest?.id} className={cn('flex items-center', className)}>
       <span className={cn(styles.root)}>
@@ -22,4 +22,4 @@ function Switch({ text, className, ...rest }: SwitchProps) {
   )
 }
 
-export default Switch
+export default ThemeSwitch

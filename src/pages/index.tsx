@@ -50,7 +50,7 @@ const Home: NextPage = () => {
   const isConvertError = useMemo(() => status === StateStatusEnum.error, [status])
   const isConvertSuccess = useMemo(() => status === StateStatusEnum.success, [status])
 
-  const handleSwitchFromtTo = useCallback(() => {
+  const handleThemeSwitchFromtTo = useCallback(() => {
     const aux = fromCurrency
     setFromCurrency(toCurrency)
     setToCurrency(aux)
@@ -118,7 +118,7 @@ const Home: NextPage = () => {
               <Button
                 className="w-full px-1"
                 variant="primary"
-                onClick={handleSwitchFromtTo}
+                onClick={handleThemeSwitchFromtTo}
                 disabled={isConvertLoading}
               >
                 <FaExchangeAlt className="rotate-90 md:rotate-0" size={18} />

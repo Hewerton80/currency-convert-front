@@ -1,11 +1,7 @@
-import { HTMLAttributes, useContext, useEffect, useState } from 'react'
+import { HTMLAttributes, useEffect, useState } from 'react'
 import cn from 'classnames'
-import Image from 'next/image'
-import { FaBars, FaAngleDown, FaSignOutAlt } from 'react-icons/fa'
-import Avatar from '../../ui/media/Avatar'
-import DropDown from '../../ui/overlay/DropDown'
 import styles from './styles.module.css'
-import Switch from '../../ui/forms/Switch'
+import ThemeSwitch from '../../ui/forms/ThemeSwitch'
 
 interface HeaderProps extends HTMLAttributes<HTMLElement> {}
 
@@ -38,13 +34,16 @@ function Header({ className, ...rest }: HeaderProps) {
       {...rest}
     >
       <div className={styles.header_inner}>
-        <span className={cn(styles['theme-switch'])}>
-          <Switch
-            id="theme-switch"
+        <div className={styles.header_left}>
+          <h2>Conversor de moeadas</h2>
+        </div>
+        <div className={styles.header_right}>
+          <ThemeSwitch
+            id="theme-ThemeSwitch"
             checked={theme === 'dark'}
             onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
           />
-        </span>
+        </div>
       </div>
     </header>
   )

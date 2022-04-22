@@ -21,7 +21,7 @@
 .root > input ~ .cicle {
   content: '';
   transition: 0.3s ease all;
-  @apply absolute z-20 h-[33px] w-[33px] rounded-full bg-light left-1 
+  @apply absolute z-20 h-[31px] w-[31px] rounded-full bg-light left-1 
   translate-y-1/2 bottom-1/2 cursor-pointer;
 }
 
