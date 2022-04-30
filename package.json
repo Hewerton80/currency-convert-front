@@ -1,5 +1,5 @@
 {
-  "name": "blog-cms",
+  "name": "currency-convert-front",
   "private": true,
   "scripts": {
     "dev": "next dev",
