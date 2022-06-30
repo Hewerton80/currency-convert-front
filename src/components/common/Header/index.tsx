@@ -35,7 +35,7 @@ function Header({ className, ...rest }: HeaderProps) {
     >
       <div className={styles.header_inner}>
         <div className={styles.header_left}>
-          <h2>Conversor de moeadas</h2>
+          <h2>Conversor de moedas</h2>
         </div>
         <div className={styles.header_right}>
           <ThemeSwitch
