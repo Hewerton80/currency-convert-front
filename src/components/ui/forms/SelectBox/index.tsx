@@ -5,6 +5,7 @@ import {
   useState,
   startTransition,
   useDeferredValue,
+  useRef,
 } from 'react'
 import cn from 'classnames'
 import styles from './styles.module.css'
@@ -44,6 +45,8 @@ function SelectBox({
   const [search, setSearch] = useState('')
 
   const [filteredOptions, setFilteredOptions] = useState<ISelectBoxOptions[]>(options)
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const isFocusedDeferredValue = useDeferredValue(isFocused)
 
@@ -126,11 +129,16 @@ function SelectBox({
             <span>
               <InputText
                 value={search}
+                ref={inputRef}
                 onChange={(e) => setSearch(e.target.value)}
                 autoFocus
               />
             </span>
-            <List className="max-h-96 overflow-y-auto ">
+            <List
+              className="max-h-96 overflow-y-auto"
+              onFocus={(e) => console.log('focus')}
+              tabIndex={-1}
+            >
               {filteredOptions.map((opt, i) => (
                 <ListItem
                   key={opt.value + i}

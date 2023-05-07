@@ -7,27 +7,35 @@ import FormGroup from '../components/ui/forms/FormGroup'
 import FormLabel from '../components/ui/forms/FormLabel'
 import InputTextCurrency from '../components/ui/forms/InputCurrency'
 import SelectBox, { ISelectBoxOptions } from '../components/ui/forms/SelectBox'
-import { Card, CardBody, CardHeader, CardTitle } from '../components/ui/layout/Card'
+// import { Card, CardBody, CardHeader, CardTitle } from '../components/ui/layout/Card'
 import { apiBase } from '../services/apiBase'
 import { StateStatusEnum } from '../types/Global'
 import { currenciesOptions } from '../utils/currenciesOptions'
 import { getCurrencyFormat } from '../utils/getCurrencyFormat'
 import { addCurrencyMask, removeCurrencyMask } from '../utils/mask'
+import { Card, SelectOption, Select } from 'hikari-ui'
 
 const Home: NextPage = () => {
   const [lastAmoutInput, setLastAmoutInput] = useState('')
   const [amoutInput, setAmoutInput] = useState('R$ 1,00')
-  const [fromCurrency, setFromCurrency] = useState<ISelectBoxOptions>({
-    text: 'BRL - Real brasileiro',
+  const [fromCurrency, setFromCurrency] = useState<SelectOption>({
+    label: 'BRL - Real brasileiro',
     value: 'BRL',
   })
-  const [toCurrency, setToCurrency] = useState<ISelectBoxOptions>({
-    text: 'USD - Dólar dos EUA',
+  const [toCurrency, setToCurrency] = useState<SelectOption>({
+    label: 'USD - Dólar dos EUA',
     value: 'USD',
   })
   const selelectBoxOptions = useMemo<ISelectBoxOptions[]>(() => {
     return currenciesOptions.map((opt) => ({
       text: `${opt.code} - ${opt.name}`,
+      value: opt.code,
+    }))
+  }, [])
+
+  const selelectOptions = useMemo<SelectOption[]>(() => {
+    return currenciesOptions.map((opt) => ({
+      label: `${opt.code} - ${opt.name}`,
       value: opt.code,
     }))
   }, [])
@@ -83,10 +91,10 @@ const Home: NextPage = () => {
   return (
     <div className="flex justify-center w-full h-full">
       <Card className="max-w-7xl w-full mb-16">
-        <CardHeader>
-          <CardTitle>Converter</CardTitle>
-        </CardHeader>
-        <CardBody>
+        <Card.Header>
+          <Card.Title>Converter</Card.Title>
+        </Card.Header>
+        <Card.Body>
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 md:col-span-3">
               <FormGroup>
@@ -103,16 +111,15 @@ const Home: NextPage = () => {
               </FormGroup>
             </div>
             <div className="col-span-12 md:col-span-4">
-              <FormGroup>
-                <FormLabel>De</FormLabel>
-                <SelectBox
-                  id="from-currency"
-                  selectedOption={fromCurrency}
-                  options={selelectBoxOptions}
-                  onChange={(option) => setFromCurrency(option)}
-                  disabled={isConvertLoading}
-                />
-              </FormGroup>
+              <Select
+                label="De"
+                id="from-currency"
+                value={fromCurrency}
+                isAutocomplite
+                options={selelectOptions}
+                onChangeSingleOption={setFromCurrency}
+                isDisabled={isConvertLoading}
+              />
             </div>
             <div className="flex items-end col-span-12 md:col-span-1">
               <Button
@@ -125,16 +132,15 @@ const Home: NextPage = () => {
               </Button>
             </div>
             <div className="col-span-12 md:col-span-4">
-              <FormGroup>
-                <FormLabel>Para</FormLabel>
-                <SelectBox
-                  id="to-currency"
-                  selectedOption={toCurrency}
-                  options={selelectBoxOptions}
-                  onChange={(option) => setToCurrency(option)}
-                  disabled={isConvertLoading}
-                />
-              </FormGroup>
+              <Select
+                label="Para"
+                id="to-currency"
+                value={toCurrency}
+                isAutocomplite
+                options={selelectOptions}
+                onChangeSingleOption={setToCurrency}
+                isDisabled={isConvertLoading}
+              />
             </div>
             <div className="col-span-12">
               <div className="flex justify-end">
@@ -166,7 +172,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-        </CardBody>
+        </Card.Body>
       </Card>
     </div>
   )
